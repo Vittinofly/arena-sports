@@ -1,0 +1,25 @@
+{
+  "id": "agendar.html",
+  "name": "Arena Esporte · Quadras de areia",
+  "short_name": "Arena Esporte",
+  "description": "Veja os horários livres e reserve as quadras de areia da Arena Esporte, em São Luís de Montes Belos (GO).",
+  "start_url": "agendar.html?origem=app",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0E1433",
+  "theme_color": "#0E1433",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["sports", "lifestyle"],
+  "icons": [
+    { "src": "img/favicon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "img/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "img/icone-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "img/icone-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Marcar horário", "short_name": "Marcar", "url": "agendar.html", "icons": [{ "src": "img/favicon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Minha reserva", "short_name": "Reserva", "url": "reserva.html", "icons": [{ "src": "img/favicon-192.png", "sizes": "192x192", "type": "image/png" }] }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "arena-esporte-testes",
+  "private": true,
+  "type": "module",
+  "description": "Testes das regras de agendamento (JS) e do banco (schema.sql num Postgres em memória). Não faz parte do site publicado.",
+  "scripts": {
+    "regras": "node --test regras.test.mjs",
+    "banco": "node banco.test.mjs",
+    "test": "node --test regras.test.mjs && node banco.test.mjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.3.16"
+  }
+}

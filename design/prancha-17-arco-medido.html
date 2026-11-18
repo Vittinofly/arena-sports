@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Prancha 17 · Arco Medido</title>
+  <!--
+    Prancha 17 · Arco Medido (filosofia em filosofia-arco-medido.md)
+    Elevação lateral de uma bola cruzando a rede ao fim da tarde, registrada em 17 exposições
+    com intervalo de tempo constante. Tudo é medido: 1 m = 120 px, bola de 22 cm em escala,
+    rede de 2,20 m, ápice a 5,50 m sobre o eixo da rede, sol com raio igual à altura da rede.
+    A costura da bola gira 22,5° por exposição: uma volta completa do chute à última posição.
+    Gerar: abrir por um servidor local (as fontes não carregam via file://) e salvar em
+    2160 × 2700 (PNG) ou imprimir em PDF (vetorial).
+  -->
+  <style>
+    @font-face { font-family: 'Archivo'; src: url('fontes/Archivo-variavel.ttf') format('truetype'); font-weight: 100 900; font-stretch: 62% 125%; }
+    @font-face { font-family: 'Geist Mono'; src: url('fontes/GeistMono-Regular.ttf') format('truetype'); font-weight: 400; }
+    @font-face { font-family: 'Instrument Serif'; src: url('fontes/InstrumentSerif-Italic.ttf') format('truetype'); font-style: italic; }
+    @page { size: 1080px 1350px; margin: 0; }
+    /* fundo na cor da areia: o PDF arredonda a página meio ponto para cima e a sobra fica invisível */
+    html, body { margin: 0; padding: 0; background: #D0AD74; }
+    svg { display: block; width: 1080px; height: 1350px; }
+    .mono { font-family: 'Geist Mono', monospace; font-size: 9.5px; letter-spacing: 1.6px; }
+  </style>
+</head>
+<body>
+  <svg id="prancha" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350"></svg>
+  <script>
+  (async function () {
+    'use strict';
+    const NS = 'http://www.w3.org/2000/svg';
+    const svg = document.getElementById('prancha');
+
+    /* ---------- Medidas ---------- */
+    const W = 1080, H = 1350, M = 72;          // tela 4:5 e margem
+    const CHAO = 1010;                          // linha da areia
+    const PXM = 120;                            // 1 metro
+    const EIXO = 540;                           // poste da rede
+    const ALT_REDE = 2.20;                      // topo da rede (m)
+    const R_SOL = ALT_REDE * PXM;               // o raio do sol é a altura da rede
+    const APICE = 5.50, H0 = 0.80, MEIO = 3.10; // ápice, altura do chute e meio vão (m)
+    const K = (APICE - H0) / (MEIO * MEIO);
+    const N = 17;                               // exposições
+    const GIRO = 360 / (N - 1);                 // 22,5° por exposição: uma volta completa
+    const R_BOLA = 0.11 * PXM;                  // bola de 22 cm
+    const C = { creme: '#FBF1DA', sol: '#F5B731', marinho: '#0B1130' };
+    const yDe = (m) => CHAO - m * PXM;
+    const altura = (dxm) => APICE - K * dxm * dxm;
+    const passo = (2 * MEIO) / (N - 1);
+    const bolas = [];
+    for (let i = 0; i < N; i++) {
+      const dxm = -MEIO + i * passo;
+      bolas.push({ i, x: EIXO + dxm * PXM, y: yDe(altura(dxm)) });
+    }
+    const QUEDA = EIXO + Math.sqrt(APICE / K) * PXM;     // onde a bola encontra a areia
+    const TOPO_REDE = yDe(ALT_REDE);
+    const H_TOPO = 170;                                  // 23H na escala da direita
+    const yHora = (h) => CHAO - (h - 17) * (CHAO - H_TOPO) / 6;
+
+    /* ---------- Utilidades ---------- */
+    function el(tag, attrs, pai) {
+      const e = document.createElementNS(NS, tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      (pai || svg).appendChild(e);
+      return e;
+    }
+    function texto(conteudo, attrs, pai) { const t = el('text', attrs, pai); t.textContent = conteudo; return t; }
+    function semente(a) {
+      return function () {
+        a |= 0; a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+    const r2 = (v) => Math.round(v * 100) / 100;
+    const caixa = (e, folga) => { const b = e.getBBox(); return [b.x - folga, b.y - folga, b.x + b.width + folga, b.y + b.height + folga]; };
+    const distCaixa = (x, y, c) => Math.hypot(Math.max(c[0] - x, 0, x - c[2]), Math.max(c[1] - y, 0, y - c[3]));
+    // Afastamento suave: perto de um texto as marcas rareiam aos poucos, sem caixa recortada
+    const suave = (x, y, caixas, raio, rnd) => caixas.every((c) => {
+      const f = Math.min(1, distCaixa(x, y, c) / raio);
+      return rnd() < f * f * (3 - 2 * f);
+    });
+
+    await Promise.all([
+      document.fonts.load('13px "Archivo"'), document.fonts.load('9.5px "Geist Mono"'), document.fonts.load('italic 34px "Instrument Serif"')
+    ]);
+    await document.fonts.ready;
+
+    /* ---------- Definições ---------- */
+    const defs = el('defs', {});
+    const ceu = el('linearGradient', { id: 'ceu', gradientUnits: 'userSpaceOnUse', x1: 0, y1: 0, x2: 0, y2: CHAO }, defs);
+    [['0', '#03061A'], ['0.48', '#0A1134'], ['0.84', '#161E4B'], ['1', '#232958']].forEach(([o, c]) => el('stop', { offset: o, 'stop-color': c }, ceu));
+    const brilho = el('radialGradient', { id: 'brilho', gradientUnits: 'userSpaceOnUse', cx: EIXO, cy: CHAO, r: 640 }, defs);
+    [['0', 0.30], ['0.45', 0.095], ['0.78', 0.025], ['1', 0]].forEach(([o, a]) => el('stop', { offset: o, 'stop-color': C.sol, 'stop-opacity': a }, brilho));
+    const areia = el('linearGradient', { id: 'areia', gradientUnits: 'userSpaceOnUse', x1: 0, y1: CHAO, x2: 0, y2: H }, defs);
+    [['0', '#EBD6AA'], ['1', '#D0AD74']].forEach(([o, c]) => el('stop', { offset: o, 'stop-color': c }, areia));
+    const semBolas = el('mask', { id: 'semBolas', maskUnits: 'userSpaceOnUse', x: 0, y: 0, width: W, height: H }, defs);
+    el('rect', { x: 0, y: 0, width: W, height: H, fill: '#fff' }, semBolas);
+    bolas.forEach((b) => el('circle', { cx: r2(b.x), cy: r2(b.y), r: R_BOLA + 4.5, fill: '#000' }, semBolas));
+    const foraSol = el('mask', { id: 'foraSol', maskUnits: 'userSpaceOnUse', x: 0, y: 0, width: W, height: H }, defs);
+    el('rect', { x: 0, y: 0, width: W, height: H, fill: '#fff' }, foraSol);
+    el('circle', { cx: EIXO, cy: CHAO, r: R_SOL, fill: '#000' }, foraSol);
+    const dentroSol = el('clipPath', { id: 'dentroSol' }, defs);
+    el('circle', { cx: EIXO, cy: CHAO, r: R_SOL }, dentroSol);
+    const soCeu = el('clipPath', { id: 'soCeu' }, defs);
+    el('rect', { x: 0, y: 0, width: W, height: CHAO }, soCeu);
+
+    /* ---------- 1. Céu ---------- */
+    el('rect', { x: 0, y: 0, width: W, height: CHAO, fill: 'url(#ceu)' });
+
+    /* ---------- Textos (medidos agora, levados para cima no fim) ---------- */
+    const camadaTexto = el('g', {});
+    const tMarca = texto('ARENA ESPORTE', {
+      x: M, y: 100, fill: C.creme, 'font-family': 'Archivo', 'font-weight': 300, 'font-stretch': '118%',
+      'font-size': 13, 'letter-spacing': 4.9
+    }, camadaTexto);
+    const tPrancha = texto('PRANCHA Nº 17', { x: W - M, y: 96, class: 'mono', fill: C.creme, 'fill-opacity': 0.88, 'text-anchor': 'end' }, camadaTexto);
+    const tVista = texto('ELEVAÇÃO LATERAL · 17 EXPOSIÇÕES', { x: W - M, y: 112, class: 'mono', fill: C.creme, 'fill-opacity': 0.5, 'text-anchor': 'end' }, camadaTexto);
+    const tFrase = texto('fim de tarde na areia', {
+      x: EIXO, y: 1190, 'text-anchor': 'middle', fill: C.marinho, 'font-family': 'Instrument Serif',
+      'font-style': 'italic', 'font-size': 34, 'letter-spacing': 0.3
+    }, camadaTexto);
+    const tCoord = texto('16°31′59″S · 50°22′37″W', { x: M, y: H - M, class: 'mono', fill: C.marinho, 'fill-opacity': 0.78 }, camadaTexto);
+    const tCidade = texto('SÃO LUÍS DE MONTES BELOS · GO', { x: W - M, y: H - M, class: 'mono', fill: C.marinho, 'fill-opacity': 0.78, 'text-anchor': 'end' }, camadaTexto);
+    // Rótulo do ápice: acima da bola, continuando o eixo da rede
+    const ap = bolas[8];
+    // t em itálico serifado, como na notação de física; índice em subscrito
+    const tempo = (i) => '<tspan font-family="Instrument Serif" font-style="italic" font-size="13.5" letter-spacing="0">t</tspan>' +
+      '<tspan font-family="Instrument Serif" font-style="italic" font-size="9" letter-spacing="0" dy="3">' + i + '</tspan>';
+    const tApice = el('text', { x: EIXO, y: r2(ap.y - R_BOLA - 40), class: 'mono', fill: C.creme, 'fill-opacity': 0.86, 'text-anchor': 'middle' }, camadaTexto);
+    tApice.innerHTML = tempo(8) + '<tspan dy="-3"> · 5,50 M</tspan>';
+    const caixasCeu = [caixa(tMarca, 4), caixa(tPrancha, 4), caixa(tVista, 4), caixa(tApice, 4)];
+    const caixasAreia = [caixa(tFrase, 2), caixa(tCoord, 2), caixa(tCidade, 2)];
+
+    /* ---------- 2. Estrelas: o céu inteiro, mais denso no alto, onde já é noite ---------- */
+    const rndE = semente(23);
+    const estrelas = el('g', { fill: C.creme });
+    const LIMITE = CHAO - 236;
+    let feitas = 0;
+    for (let n = 0; n < 20000 && feitas < 560; n++) {
+      const x = 10 + rndE() * (W - 20);
+      const y = 8 + Math.pow(rndE(), 1.75) * (LIMITE - 8);
+      if (y > yDe(6) - 42 && x < M + 50) continue;                 // coluna da escala de altura
+      if (y > H_TOPO - 42 && x > W - M - 50) continue;             // coluna da escala de hora
+      if (bolas.some((b) => Math.hypot(b.x - x, b.y - y) < R_BOLA + 10)) continue;
+      if (Math.hypot(x - EIXO, y - CHAO) < R_SOL + 38) continue;
+      if (Math.abs(x - EIXO) < 3 && y > ap.y - R_BOLA - 34) continue;
+      if (!suave(x, y, caixasCeu, 26, rndE)) continue;
+      const alto = 1 - y / LIMITE;
+      const forte = rndE() < 0.026;
+      el('circle', {
+        cx: r2(x), cy: r2(y), r: forte ? 1.15 : r2(0.3 + rndE() * 0.55),
+        'fill-opacity': forte ? 0.95 : r2(0.16 + alto * 0.52 + rndE() * 0.2)
+      }, estrelas);
+      feitas++;
+    }
+
+    /* ---------- 3. Sol, com o brilho baixo no horizonte ---------- */
+    el('circle', { cx: EIXO, cy: CHAO, r: 640, fill: 'url(#brilho)', 'clip-path': 'url(#soCeu)' });
+    el('circle', { cx: EIXO, cy: CHAO, r: R_SOL, fill: C.sol, 'clip-path': 'url(#soCeu)' });
+
+    /* ---------- 4. Escalas: altura (m) à esquerda, hora à direita ---------- */
+    const escalas = el('g', { stroke: C.creme, 'stroke-width': 0.7, fill: 'none' });
+    const rotulos = el('g', { class: 'mono', fill: C.creme });
+    el('line', { x1: M, y1: yDe(6), x2: M, y2: CHAO, 'stroke-opacity': 0.42 }, escalas);
+    for (let m = 0.5; m <= 6.001; m += 0.5) {
+      const inteiro = Math.abs(m - Math.round(m)) < 0.01;
+      el('line', { x1: M, y1: r2(yDe(m)), x2: M + (inteiro ? 8 : 4), y2: r2(yDe(m)), 'stroke-opacity': inteiro ? 0.62 : 0.4 }, escalas);
+      if (inteiro) texto(String(Math.round(m)), { x: M + 13, y: r2(yDe(m) - 4), 'fill-opacity': 0.56 }, rotulos);
+    }
+    el('line', { x1: M, y1: TOPO_REDE, x2: M + 14, y2: TOPO_REDE, stroke: C.sol, 'stroke-width': 1.1 });
+    texto('2,20', { x: M + 19, y: TOPO_REDE - 4, fill: C.sol }, rotulos);
+    texto('ALTURA · M', { x: M, y: yDe(6) - 22, 'fill-opacity': 0.5 }, rotulos);
+    el('line', { x1: W - M, y1: H_TOPO, x2: W - M, y2: CHAO, 'stroke-opacity': 0.42 }, escalas);
+    for (let h = 17; h <= 23; h += 0.5) {
+      const inteira = h % 1 === 0;
+      el('line', { x1: W - M - (inteira ? 8 : 4), y1: r2(yHora(h)), x2: W - M, y2: r2(yHora(h)), 'stroke-opacity': inteira ? 0.62 : 0.4 }, escalas);
+      if (inteira) texto(h + 'H', { x: W - M - 13, y: r2(yHora(h) - 4), 'text-anchor': 'end', 'fill-opacity': h === 17 ? 0.9 : 0.56, fill: h === 17 ? C.sol : C.creme }, rotulos);
+    }
+    texto('HORA', { x: W - M, y: H_TOPO - 22, 'text-anchor': 'end', 'fill-opacity': 0.5 }, rotulos);
+
+    /* ---------- 5. Trajetória: do chute até a areia ---------- */
+    let d = '';
+    for (let dxm = -MEIO; dxm <= (QUEDA - EIXO) / PXM + 0.0001; dxm += 0.02) {
+      d += (d ? ' L ' : 'M ') + r2(EIXO + dxm * PXM) + ' ' + r2(yDe(Math.max(0, altura(dxm))));
+    }
+    el('path', { d, fill: 'none', stroke: C.creme, 'stroke-width': 0.9, 'stroke-opacity': 0.55, 'stroke-dasharray': '1.4 5.6', 'stroke-linecap': 'round', mask: 'url(#semBolas)' });
+
+    /* ---------- 6. Projeções de cada exposição até a areia ---------- */
+    const projecoes = (cor, opac, recorte) => {
+      const g1 = el('g', recorte);
+      const g2 = el('g', { mask: 'url(#semBolas)', stroke: cor, 'stroke-opacity': opac, 'stroke-width': 0.75, 'stroke-dasharray': '0.9 3.4', 'stroke-linecap': 'round' }, g1);
+      bolas.forEach((b) => el('line', { x1: r2(b.x), y1: r2(b.y), x2: r2(b.x), y2: b.i === 8 ? TOPO_REDE : CHAO }, g2));
+    };
+    projecoes(C.creme, 0.34, { mask: 'url(#foraSol)' });
+    projecoes(C.marinho, 0.5, { 'clip-path': 'url(#dentroSol)' });
+    // O eixo continua acima do ápice até o rótulo
+    el('line', {
+      x1: EIXO, y1: r2(ap.y - R_BOLA - 7), x2: EIXO, y2: r2(ap.y - R_BOLA - 30),
+      stroke: C.creme, 'stroke-opacity': 0.6, 'stroke-width': 0.7
+    });
+
+    /* ---------- 7. Rede, vista de lado, em contraluz ---------- */
+    const rede = el('g', { fill: C.marinho, stroke: 'none' });
+    el('rect', { x: EIXO - 1.2, y: TOPO_REDE, width: 2.4, height: CHAO - TOPO_REDE }, rede);
+    el('rect', { x: EIXO - 2.2, y: TOPO_REDE, width: 4.4, height: PXM }, rede);
+    el('rect', { x: EIXO - 7, y: TOPO_REDE, width: 14, height: 0.05 * PXM }, rede);
+    const malha = el('g', { stroke: C.marinho, 'stroke-width': 0.9 });
+    for (let c = 1; c <= 10; c++) {
+      const y = r2(TOPO_REDE + c * 0.1 * PXM);
+      el('line', { x1: EIXO - 6, y1: y, x2: EIXO + 6, y2: y }, malha);
+    }
+
+    /* ---------- 8. As 17 exposições (a costura gira 22,5° a cada uma) ---------- */
+    const COSTURA = 'M-12.9 1.2 C -6 7.6, 6 7.6, 12.9 1.2 M-12.2 -4.2 C -5 2.6, 5 2.6, 12.2 -4.2';
+    bolas.forEach((b) => {
+      const apice = b.i === 8;
+      el('circle', {
+        cx: r2(b.x), cy: r2(b.y), r: R_BOLA, fill: apice ? C.sol : 'url(#ceu)',
+        stroke: apice ? C.sol : C.creme, 'stroke-width': 1.3
+      });
+      const g = el('g', { transform: 'translate(' + r2(b.x) + ' ' + r2(b.y) + ') rotate(' + r2(b.i * GIRO) + ') scale(' + r2(R_BOLA / 13) + ')' });
+      el('path', {
+        d: COSTURA, fill: 'none', stroke: apice ? C.marinho : C.creme, 'stroke-opacity': apice ? 0.85 : 0.78,
+        'stroke-width': 1, 'vector-effect': 'non-scaling-stroke', 'stroke-linecap': 'round'
+      }, g);
+    });
+
+    /* ---------- 9. Areia ---------- */
+    el('rect', { x: 0, y: CHAO, width: W, height: H - CHAO, fill: 'url(#areia)' });
+    const marcasChao = [];
+    [0, 8, 16].forEach((i) => marcasChao.push([bolas[i].x - 12, CHAO + 22, bolas[i].x + 14, CHAO + 38]));
+    marcasChao.push([QUEDA - 8, CHAO + 11, QUEDA + 8, CHAO + 25]);
+    const rndA = semente(17);
+    const graos = {
+      escuro: el('g', { fill: '#9A7843' }),
+      claro: el('g', { fill: '#FFF8E6' }),
+      fundo: el('g', { fill: '#6E532C' })
+    };
+    for (let n = 0; n < 19000; n++) {
+      const t = Math.pow(rndA(), 0.78);
+      const y = CHAO + 1.2 + t * (H - CHAO - 1.2);
+      const x = rndA() * W;
+      if (!suave(x, y, caixasAreia, 22, rndA)) continue;
+      if (!suave(x, y, marcasChao, 8, rndA)) continue;
+      const tam = 0.26 + 1.05 * Math.pow(t, 1.25) * (0.55 + 0.45 * rndA());
+      const sorte = rndA();
+      const grupo = sorte < 0.7 ? graos.escuro : sorte < 0.9 ? graos.claro : graos.fundo;
+      const op = grupo === graos.claro ? 0.45 + rndA() * 0.45 : grupo === graos.fundo ? 0.25 + rndA() * 0.3 : 0.2 + rndA() * 0.42;
+      el('circle', { cx: r2(x), cy: r2(y), r: r2(tam), 'fill-opacity': r2(op) }, grupo);
+    }
+
+    /* ---------- 10. Marcas no chão: tempo e queda ---------- */
+    const chao = el('g', { stroke: C.marinho, 'stroke-width': 0.9, 'stroke-opacity': 0.8 });
+    bolas.forEach((b) => el('line', { x1: r2(b.x), y1: CHAO, x2: r2(b.x), y2: CHAO + (b.i % 4 === 0 ? 9 : 5) }, chao));
+    el('line', { x1: r2(QUEDA - 5), y1: CHAO + 13, x2: r2(QUEDA + 5), y2: CHAO + 23, stroke: C.marinho, 'stroke-width': 1.1 });
+    el('line', { x1: r2(QUEDA + 5), y1: CHAO + 13, x2: r2(QUEDA - 5), y2: CHAO + 23, stroke: C.marinho, 'stroke-width': 1.1 });
+    const rotChao = el('g', { fill: C.marinho, 'fill-opacity': 0.86, 'text-anchor': 'middle' });
+    [0, 8, 16].forEach((i) => {
+      const t = el('text', { x: r2(bolas[i].x), y: CHAO + 31 }, rotChao);
+      t.innerHTML = tempo(i);
+    });
+
+    /* ---------- 11. Textos por cima de tudo ---------- */
+    svg.appendChild(camadaTexto);
+    window.prontoParaFoto = true;
+  })();
+  </script>
+</body>
+</html>

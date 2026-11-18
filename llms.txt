@@ -1,0 +1,43 @@
+# Arena Esporte
+
+> Arena Esporte é uma arena de futevôlei e vôlei de areia em São Luís de Montes Belos, Goiás (GO), Brasil. Tem 3 quadras de areia cercadas por tela, com rede e refletores para jogos à noite, varanda coberta com mesas e pátio para estacionar. Fica na Chácara Bom Jesus, abaixo da Fosbel (Google: R. Jabaquara, St. Central). A reserva de quadra é feita pelo site e confirmada pelo WhatsApp (64) 98457-9527. O pagamento é feito na arena.
+
+## Dados da empresa
+
+- Nome: Arena Esporte (Instagram: @arenaesportesaoluis)
+- Segmento: arena esportiva / quadra de esportes de areia (futevôlei e vôlei de areia)
+- Endereço: Chácara Bom Jesus, abaixo da Fosbel, R. Jabaquara, St. Central, São Luís de Montes Belos - GO, 76100-000
+- Plus Code: FJ8F+P6 São Luís de Montes Belos (coordenadas aproximadas -16.53319, -50.37694)
+- WhatsApp: +55 64 98457-9527 (https://wa.me/5564984579527)
+- Instagram: https://www.instagram.com/arenaesportesaoluis/
+- Site: https://arena-esporte.netlify.app/
+- Horário: a arena abre a partir das 17h; os dias e horários atualizados aparecem na agenda do site, que já mostra feriados e dias fechados.
+
+## Como reservar uma quadra
+
+1. Abrir https://arena-esporte.netlify.app/agendar.html
+2. Escolher o dia (agenda aberta para os próximos 30 dias), a hora e a quadra. Só aparecem horários livres.
+3. Informar nome e WhatsApp. Não precisa de cadastro nem senha.
+4. O pedido segura o horário e a arena confirma pelo WhatsApp. O pagamento é feito na arena.
+
+## Regras da agenda
+
+- Cada WhatsApp pode ter 1 reserva ativa por vez, de até 2 horas seguidas.
+- Reserva pelo site até 1 hora antes do início. Para jogar em seguida, falar no WhatsApp.
+- Cancelamento pelo link da reserva até 3 horas antes do jogo.
+- Duas faltas sem aviso em 6 meses suspendem a reserva pelo site.
+- Turmas que jogam toda semana podem pedir horário fixo pelo WhatsApp.
+
+## Perguntas frequentes
+
+- Onde fica a Arena Esporte? Na Chácara Bom Jesus, abaixo da Fosbel, na R. Jabaquara, em São Luís de Montes Belos (GO). O último trecho é de estrada de terra.
+- Dá para jogar à noite? Sim, as quadras têm refletores.
+- Quantas quadras tem? 3 quadras de areia.
+- Quais esportes? Futevôlei e vôlei de areia.
+- Como pago? Na arena, no dia do jogo.
+- Dá para alugar todas as quadras para torneio ou confraternização? Sim, combinando pelo WhatsApp.
+
+## Páginas
+
+- [Página inicial](https://arena-esporte.netlify.app/): a arena, horários livres de hoje, modalidades, regras, fotos, perguntas frequentes e como chegar.
+- [Marcar horário](https://arena-esporte.netlify.app/agendar.html): agenda das 3 quadras com os horários livres e reserva em menos de um minuto.

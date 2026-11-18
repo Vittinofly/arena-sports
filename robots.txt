@@ -1,0 +1,61 @@
+# Arena Esporte - https://arena-esporte.netlify.app/
+# Site aberto para buscadores e assistentes de IA. Ficam de fora o painel
+# e a página da reserva (link privado de cada cliente).
+
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /reserva.html
+
+# Assistentes e buscadores de IA (liberados explicitamente)
+User-agent: GPTBot
+Allow: /
+Disallow: /admin.html
+Disallow: /reserva.html
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin.html
+Disallow: /reserva.html
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin.html
+Disallow: /reserva.html
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin.html
+Disallow: /reserva.html
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin.html
+Disallow: /reserva.html
+
+User-agent: Claude-User
+Allow: /
+Disallow: /admin.html
+Disallow: /reserva.html
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin.html
+Disallow: /reserva.html
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin.html
+Disallow: /reserva.html
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin.html
+Disallow: /reserva.html
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin.html
+Disallow: /reserva.html
+
+Sitemap: https://arena-esporte.netlify.app/sitemap.xml

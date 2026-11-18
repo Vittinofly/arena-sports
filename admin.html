@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Painel da arena | Arena Esporte</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#0E1433">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preload" href="fonts/archivo-variavel-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+  <script src="js/config.js" defer></script>
+  <script src="js/regras.js" defer></script>
+  <script src="js/seed.js" defer></script>
+  <script src="js/dados.js" defer></script>
+  <script src="js/admin.js" defer></script>
+</head>
+<body class="adm">
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-whats" viewBox="0 0 24 24"><path d="M3.6 20.4l1.2-3.7a8.6 8.6 0 1 1 3.4 3z"/><path d="M9.3 8.3c.3-.4.7-.5 1-.4l.5.2.8 1.7c.1.3 0 .6-.2.8l-.6.6c.5 1.1 1.4 2 2.5 2.5l.6-.6c.2-.2.5-.3.8-.2l1.7.8.2.5c0 .4-.1.8-.4 1-.7.5-1.7.6-2.6.3a8 8 0 0 1-4.6-4.6c-.3-.9-.2-1.9.3-2.6z"/></symbol>
+    <symbol id="i-agenda" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 17.5h2"/></symbol>
+    <symbol id="i-lista" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.2"/><circle cx="4.5" cy="12" r="1.2"/><circle cx="4.5" cy="18" r="1.2"/></symbol>
+    <symbol id="i-repetir" viewBox="0 0 24 24"><path d="M17 2.5l3.5 3.5L17 9.5"/><path d="M3.5 11V10a4 4 0 0 1 4-4h13"/><path d="M7 21.5L3.5 18 7 14.5"/><path d="M20.5 13v1a4 4 0 0 1-4 4h-13"/></symbol>
+    <symbol id="i-feriado" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M16 3v4M8 3v4M3 10h18M9 13.5l6 5M15 13.5l-6 5"/></symbol>
+    <symbol id="i-rede" viewBox="0 0 24 24"><path d="M3 6h18M3 6v13M21 6v13M3 10h18M3 14h18M7 6v8M11 6v8M15 6v8M19 6v8"/></symbol>
+    <symbol id="i-ajustes" viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
+    <symbol id="i-turma" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.3"/><path d="M2.8 20a6.2 6.2 0 0 1 12.4 0"/><path d="M15.5 4.8a3.3 3.3 0 0 1 0 6.4M17.5 14.2a6.2 6.2 0 0 1 3.7 5.8"/></symbol>
+    <symbol id="i-telefone" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></symbol>
+    <symbol id="i-sair" viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l-5-5 5-5M5 12h11"/></symbol>
+    <symbol id="i-site" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></symbol>
+    <symbol id="i-mais" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-anterior" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-proximo" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l4.5 4.5 10.5-10.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-alerta" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></symbol>
+    <symbol id="i-sino" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="i-cadeado" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-olho" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-editar" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
+    <symbol id="i-lixo" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ================= TELA DE LOGIN (obrigatória) ================= -->
+  <main class="login" data-tela-login hidden>
+    <div class="login__lado" aria-hidden="true">
+      <span class="login__sol"></span>
+      <p class="login__frase">Agenda das quadras, pedidos, feriados e turmas fixas num lugar só.</p>
+      <div class="rede-faixa"></div>
+    </div>
+    <div class="login__area">
+      <div class="login__card">
+        <img class="login__logo" src="img/logo-arena-esporte.webp" alt="Arena Esporte" width="88" height="88">
+        <h1 class="login__titulo">Painel da arena</h1>
+        <p class="login__sub" data-login-sub>Entre com o e-mail e a senha da administração.</p>
+        <div class="alerta alerta--info" data-login-demo hidden><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg><p>Modo demonstração: o acesso está definido em js/config.js (demoAdmin).</p></div>
+        <div data-login-msg aria-live="assertive"></div>
+
+        <form class="campos" data-form-login novalidate>
+          <div class="campo">
+            <label for="l-email">E-mail</label>
+            <input id="l-email" name="email" type="email" autocomplete="username" inputmode="email" required>
+          </div>
+          <div class="campo">
+            <label for="l-senha">Senha</label>
+            <div class="senha">
+              <input id="l-senha" name="senha" type="password" autocomplete="current-password" required minlength="6">
+              <button class="senha__ver" type="button" data-ver-senha aria-label="Mostrar senha" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-olho"/></svg></button>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg" type="submit" data-botao-login><svg class="icon" aria-hidden="true"><use href="#i-cadeado"/></svg> Entrar no painel</button>
+          <button class="btn btn--texto" type="button" data-ir-recuperar>Esqueci minha senha</button>
+        </form>
+
+        <form class="campos" data-form-recuperar novalidate hidden>
+          <p class="login__sub">Digite o e-mail da administração. Se ele estiver cadastrado, chega um link para criar uma senha nova.</p>
+          <div class="campo">
+            <label for="r-email">E-mail</label>
+            <input id="r-email" name="email" type="email" autocomplete="username" inputmode="email" required>
+          </div>
+          <button class="btn btn--primary btn--lg" type="submit">Mandar o link</button>
+          <button class="btn btn--texto" type="button" data-voltar-login>Voltar para o login</button>
+        </form>
+
+        <form class="campos" data-form-nova-senha novalidate hidden>
+          <p class="login__sub">Crie a nova senha do painel (mínimo de 8 caracteres).</p>
+          <div class="campo">
+            <label for="n-senha">Nova senha</label>
+            <input id="n-senha" name="senha" type="password" autocomplete="new-password" minlength="8" required>
+          </div>
+          <div class="campo">
+            <label for="n-senha2">Repita a nova senha</label>
+            <input id="n-senha2" name="senha2" type="password" autocomplete="new-password" minlength="8" required>
+          </div>
+          <button class="btn btn--primary btn--lg" type="submit">Salvar nova senha</button>
+        </form>
+        <p class="login__rodape"><a href="index.html">Voltar para o site</a></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= PAINEL ================= -->
+  <div class="painel" data-painel hidden>
+    <aside class="painel__menu" id="menu-painel" data-menu-painel>
+      <div class="painel__marca">
+        <img src="img/logo-arena-esporte.webp" alt="" width="40" height="40">
+        <span class="marca__nome">Arena <b>Esporte</b></span>
+      </div>
+      <nav aria-label="Seções do painel">
+        <ul class="painel__nav">
+          <li><a class="menu-item" href="#agenda" data-ir="agenda"><svg class="icon" aria-hidden="true"><use href="#i-agenda"/></svg>Agenda</a></li>
+          <li><a class="menu-item" href="#pedidos" data-ir="pedidos"><svg class="icon" aria-hidden="true"><use href="#i-lista"/></svg>Pedidos <span class="badge" data-badge-pendentes hidden>0</span></a></li>
+          <li><a class="menu-item" href="#fixos" data-ir="fixos"><svg class="icon" aria-hidden="true"><use href="#i-repetir"/></svg>Horários fixos</a></li>
+          <li><a class="menu-item" href="#feriados" data-ir="feriados"><svg class="icon" aria-hidden="true"><use href="#i-feriado"/></svg>Feriados e bloqueios</a></li>
+          <li><a class="menu-item" href="#quadras" data-ir="quadras"><svg class="icon" aria-hidden="true"><use href="#i-rede"/></svg>Quadras</a></li>
+          <li><a class="menu-item" href="#regras" data-ir="regras"><svg class="icon" aria-hidden="true"><use href="#i-ajustes"/></svg>Horário e regras</a></li>
+          <li><a class="menu-item" href="#clientes" data-ir="clientes"><svg class="icon" aria-hidden="true"><use href="#i-turma"/></svg>Clientes</a></li>
+          <li><a class="menu-item" href="#contatos" data-ir="contatos"><svg class="icon" aria-hidden="true"><use href="#i-telefone"/></svg>Contatos e aviso</a></li>
+        </ul>
+      </nav>
+      <div class="painel__rodape">
+        <button class="menu-item" type="button" data-alertas><svg class="icon" aria-hidden="true"><use href="#i-sino"/></svg><span data-alertas-texto>Ligar alertas</span></button>
+        <a class="menu-item" href="index.html" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-site"/></svg>Ver o site</a>
+        <p class="painel__usuario" data-usuario></p>
+        <button class="menu-item" type="button" data-sair><svg class="icon" aria-hidden="true"><use href="#i-sair"/></svg>Sair</button>
+      </div>
+    </aside>
+
+    <header class="painel__topo">
+      <button class="painel__abrir" type="button" data-abrir-menu aria-expanded="false" aria-controls="menu-painel" aria-label="Abrir menu do painel"><svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <span class="painel__topo-titulo" data-titulo-topo>Agenda</span>
+      <a class="painel__topo-badge" href="#pedidos" data-ir="pedidos" data-badge-topo hidden aria-label="Pedidos pendentes">0</a>
+    </header>
+
+    <main class="painel__conteudo" id="conteudo" tabindex="-1">
+      <div class="alerta alerta--atencao" data-faixa-demo hidden>
+        <svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg>
+        <p>Modo demonstração: tudo fica salvo só neste navegador. Para usar de verdade, ligue o Supabase em js/config.js. <button class="btn btn--texto" type="button" data-resetar-demo>Restaurar dados de exemplo</button></p>
+      </div>
+
+      <section class="secao" data-secao="agenda" aria-labelledby="h-agenda" hidden>
+        <div class="secao__topo">
+          <div>
+            <h1 class="secao__titulo" id="h-agenda">Agenda</h1>
+            <p class="secao__sub">Clique num horário livre para lançar uma reserva, ou numa reserva para ver e mudar.</p>
+          </div>
+          <button class="btn btn--primary" type="button" data-nova-reserva><svg class="icon" aria-hidden="true"><use href="#i-mais"/></svg> Nova reserva</button>
+        </div>
+        <div data-corpo></div>
+      </section>
+
+      <section class="secao" data-secao="pedidos" aria-labelledby="h-pedidos" hidden>
+        <div class="secao__topo">
+          <div>
+            <h1 class="secao__titulo" id="h-pedidos">Pedidos e reservas</h1>
+            <p class="secao__sub">Confirme os pedidos do site, avise pelo WhatsApp e marque quem jogou ou faltou.</p>
+          </div>
+        </div>
+        <div data-corpo></div>
+      </section>
+
+      <section class="secao" data-secao="fixos" aria-labelledby="h-fixos" hidden>
+        <div class="secao__topo">
+          <div>
+            <h1 class="secao__titulo" id="h-fixos">Horários fixos</h1>
+            <p class="secao__sub">Turmas que jogam toda semana. O horário some da agenda do site enquanto o fixo estiver ativo.</p>
+          </div>
+          <button class="btn btn--primary" type="button" data-novo-fixo><svg class="icon" aria-hidden="true"><use href="#i-mais"/></svg> Novo horário fixo</button>
+        </div>
+        <div data-corpo></div>
+      </section>
+
+      <section class="secao" data-secao="feriados" aria-labelledby="h-feriados" hidden>
+        <div class="secao__topo">
+          <div>
+            <h1 class="secao__titulo" id="h-feriados">Feriados e bloqueios</h1>
+            <p class="secao__sub">Feche a arena num dia, abra em horário especial ou bloqueie quadras para manutenção e torneio.</p>
+          </div>
+        </div>
+        <div data-corpo></div>
+      </section>
+
+      <section class="secao" data-secao="quadras" aria-labelledby="h-quadras" hidden>
+        <div class="secao__topo">
+          <div>
+            <h1 class="secao__titulo" id="h-quadras">Quadras</h1>
+            <p class="secao__sub">"Em uso" desligado tira a quadra de tudo. "Reserva pelo site" desligado deixa só você marcar (aula, escolinha).</p>
+          </div>
+          <button class="btn btn--primary" type="button" data-nova-quadra><svg class="icon" aria-hidden="true"><use href="#i-mais"/></svg> Nova quadra</button>
+        </div>
+        <div data-corpo></div>
+      </section>
+
+      <section class="secao" data-secao="regras" aria-labelledby="h-regras" hidden>
+        <div class="secao__topo">
+          <div>
+            <h1 class="secao__titulo" id="h-regras">Horário e regras</h1>
+            <p class="secao__sub">O site e o banco seguem estes números na hora de aceitar uma reserva.</p>
+          </div>
+        </div>
+        <div data-corpo></div>
+      </section>
+
+      <section class="secao" data-secao="clientes" aria-labelledby="h-clientes" hidden>
+        <div class="secao__topo">
+          <div>
+            <h1 class="secao__titulo" id="h-clientes">Clientes</h1>
+            <p class="secao__sub">Montado a partir das reservas dos últimos 12 meses. Suspenda quem falta sem avisar.</p>
+          </div>
+        </div>
+        <div data-corpo></div>
+      </section>
+
+      <section class="secao" data-secao="contatos" aria-labelledby="h-contatos" hidden>
+        <div class="secao__topo">
+          <div>
+            <h1 class="secao__titulo" id="h-contatos">Contatos e aviso</h1>
+            <p class="secao__sub">Vale para o site inteiro: botões de WhatsApp, rodapé, faixa de aviso e Pix.</p>
+          </div>
+        </div>
+        <div data-corpo></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Janela de reserva / formulários -->
+  <dialog class="modal-adm" data-modal aria-labelledby="modal-titulo">
+    <div class="modal-adm__cabeca">
+      <h2 class="modal-adm__titulo" id="modal-titulo" data-modal-titulo></h2>
+      <button class="modal-adm__fechar" type="button" data-fechar-modal aria-label="Fechar"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="modal-adm__corpo" data-modal-corpo></div>
+  </dialog>
+
+  <!-- Confirmação genérica -->
+  <dialog class="dialogo" data-confirmar aria-labelledby="c-titulo">
+    <form method="dialog">
+      <div class="dialogo__corpo">
+        <h2 id="c-titulo" data-c-titulo></h2>
+        <div data-c-texto></div>
+      </div>
+      <div class="dialogo__acoes">
+        <button class="btn btn--ghost" value="nao" data-c-nao>Voltar</button>
+        <button class="btn btn--primary" value="sim" data-c-sim>Confirmar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toasts" data-toasts aria-live="polite"></div>
+</body>
+</html>
