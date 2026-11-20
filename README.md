@@ -31,6 +31,7 @@ Site e app de reservas da Arena Esporte, arena de futevôlei e vôlei de areia e
 | `img/` | Fotos em WebP com metadados; originais em `img/originais/` |
 | `design/` | Filosofia visual "Arco Medido", a Prancha 17 (PNG 2160 × 2700 e PDF vetorial, com o HTML que a gera), o gerador da imagem de compartilhamento (`gerar-og.py`) e as fontes com licença OFL |
 | `ficha.md` | Ficha do cliente: o que foi confirmado e o que falta |
+| `vercel.json`, `publicar.mjs` | Publicação na Vercel: monta a pasta `publico/` só com o que vai para o ar, cabeçalhos de cache e segurança |
 
 ## Regras de negócio
 
@@ -84,9 +85,19 @@ Troque antes de mostrar ao cliente. No painel, "Restaurar dados de exemplo" apag
    ```
 6. **Authentication > URL Configuration**: em *Site URL* coloque o endereço do site e, em *Redirect URLs*, `https://SEU-DOMINIO/admin.html` (é para onde volta o link de "Esqueci minha senha").
 7. **Project Settings > API**: copie a *Project URL* e a chave *anon public* para `js/config.js`.
-8. Publique a pasta (Netlify, GitHub Pages ou a conta coonexaweb) e troque `siteUrl` em `js/config.js` pelo endereço final.
+8. Publique na Vercel (seção abaixo). Se o endereço final não for `arena-esporte.vercel.app`, troque também o `siteUrl` em `js/config.js`.
 
 A chave *anon* pode ficar no site: quem protege os dados é o RLS do `schema.sql`. O público lê só quadras, horários, feriados, bloqueios e contatos; a ocupação da agenda sai pela função `ocupacao()`, sem nome nem telefone de ninguém. Reservas, turmas fixas e clientes só o ADM vê. **Nunca** coloque a chave *service_role* no site.
+
+## Publicar na Vercel
+
+1. Em <https://vercel.com/new>, importe o repositório `Vittinofly/arena-sports`.
+2. Em **Project Name**, coloque `arena-esporte` (o endereço fica `arena-esporte.vercel.app`; `arena-sports.vercel.app` já é de outro site). Deixe **Framework Preset** em *Other* e não mexa em Build/Output: o `vercel.json` já define tudo.
+3. **Deploy**. Depois disso, cada `git push` na `main` publica sozinho.
+
+O `vercel.json` roda `node publicar.mjs`, que copia para `publico/` só as páginas, `js/`, `fonts/`, `img/` (sem `img/originais/`) e os arquivos de SEO. `ficha.md`, `README.md`, `design/`, `supabase/` e `tests/` não vão para o ar. Para conferir antes de enviar: `node publicar.mjs` e abrir a pasta `publico/`.
+
+Domínio próprio: **Settings > Domains** na Vercel, e então trocar `https://arena-esporte.vercel.app/` pelo novo endereço (lista dos arquivos em "Atualizar depois de publicar").
 
 ## Como a arena usa o painel (`/admin.html`)
 
@@ -116,7 +127,7 @@ npm test        # 13 testes das regras + 25 do banco (schema.sql num Postgres em
 
 ## Atualizar depois de publicar
 
-- Trocar `https://arena-esporte.netlify.app/` pelo domínio final em: `index.html`, `agendar.html`, `robots.txt`, `sitemap.xml`, `llms.txt` e `js/config.js`.
+- Trocar `https://arena-esporte.vercel.app/` pelo domínio final em: `index.html`, `agendar.html`, `robots.txt`, `sitemap.xml`, `llms.txt` e `js/config.js`.
 - Search Console: verificar o domínio e enviar o `sitemap.xml`.
 - GA4: o bloco está comentado no `<head>` do `index.html`; troque `G-XXXXXXXXXX` e tire o comentário.
 - Depois de confirmar o horário com a arena, acrescentar `openingHoursSpecification` no JSON-LD do `index.html`.

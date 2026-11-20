@@ -10,12 +10,12 @@
 - Plus Code: FJ8F+P6 São Luís de Montes Belos (coordenadas aproximadas -16.53319, -50.37694)
 - WhatsApp: +55 64 98457-9527 (https://wa.me/5564984579527)
 - Instagram: https://www.instagram.com/arenaesportesaoluis/
-- Site: https://arena-esporte.netlify.app/
+- Site: https://arena-esporte.vercel.app/
 - Horário: a arena abre a partir das 17h; os dias e horários atualizados aparecem na agenda do site, que já mostra feriados e dias fechados.
 
 ## Como reservar uma quadra
 
-1. Abrir https://arena-esporte.netlify.app/agendar.html
+1. Abrir https://arena-esporte.vercel.app/agendar.html
 2. Escolher o dia (agenda aberta para os próximos 30 dias), a hora e a quadra. Só aparecem horários livres.
 3. Informar nome e WhatsApp. Não precisa de cadastro nem senha.
 4. O pedido segura o horário e a arena confirma pelo WhatsApp. O pagamento é feito na arena.
@@ -39,5 +39,5 @@
 
 ## Páginas
 
-- [Página inicial](https://arena-esporte.netlify.app/): a arena, horários livres de hoje, modalidades, regras, fotos, perguntas frequentes e como chegar.
-- [Marcar horário](https://arena-esporte.netlify.app/agendar.html): agenda das 3 quadras com os horários livres e reserva em menos de um minuto.
+- [Página inicial](https://arena-esporte.vercel.app/): a arena, horários livres de hoje, modalidades, regras, fotos, perguntas frequentes e como chegar.
+- [Marcar horário](https://arena-esporte.vercel.app/agendar.html): agenda das 3 quadras com os horários livres e reserva em menos de um minuto.

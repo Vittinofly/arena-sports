@@ -15,7 +15,7 @@ window.ARENA_CONFIG = {
   supabaseAnonKey: '',
 
   // Endereço final do site, com barra no fim (links do WhatsApp e da reserva)
-  siteUrl: 'https://arena-esporte.netlify.app/',
+  siteUrl: 'https://arena-esporte.vercel.app/',
 
   // Login do painel SÓ no modo demonstração (sem Supabase). Troque antes de mostrar ao cliente.
   // Com o Supabase ligado isto é ignorado: o login é o usuário criado em Authentication > Users.

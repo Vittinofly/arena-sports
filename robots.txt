@@ -1,4 +1,4 @@
-# Arena Esporte - https://arena-esporte.netlify.app/
+# Arena Esporte - https://arena-esporte.vercel.app/
 # Site aberto para buscadores e assistentes de IA. Ficam de fora o painel
 # e a página da reserva (link privado de cada cliente).
 
@@ -58,4 +58,4 @@ Allow: /
 Disallow: /admin.html
 Disallow: /reserva.html
 
-Sitemap: https://arena-esporte.netlify.app/sitemap.xml
+Sitemap: https://arena-esporte.vercel.app/sitemap.xml

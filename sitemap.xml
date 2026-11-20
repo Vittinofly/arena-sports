@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://arena-esporte.netlify.app/</loc>
+    <loc>https://arena-esporte.vercel.app/</loc>
     <lastmod>2026-11-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://arena-esporte.netlify.app/img/quadras-de-areia-iluminadas-a-noite-arena-esporte.webp</image:loc>
+      <image:loc>https://arena-esporte.vercel.app/img/quadras-de-areia-iluminadas-a-noite-arena-esporte.webp</image:loc>
       <image:title>Quadras de areia da Arena Esporte com os refletores acesos durante um jogo à noite</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://arena-esporte.netlify.app/img/quadra-de-areia-futevolei-vista-de-drone-arena-esporte.webp</image:loc>
+      <image:loc>https://arena-esporte.vercel.app/img/quadra-de-areia-futevolei-vista-de-drone-arena-esporte.webp</image:loc>
       <image:title>Quadra de areia de futevôlei vista de drone, com a varanda e o pessoal esperando a vez</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://arena-esporte.netlify.app/img/quadras-de-areia-lado-a-lado-vista-aerea-arena-esporte.webp</image:loc>
+      <image:loc>https://arena-esporte.vercel.app/img/quadras-de-areia-lado-a-lado-vista-aerea-arena-esporte.webp</image:loc>
       <image:title>Vista aérea das quadras de areia lado a lado na Arena Esporte, com a placa da arena na entrada</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://arena-esporte.netlify.app/img/varanda-coberta-area-de-convivencia-arena-esporte.webp</image:loc>
+      <image:loc>https://arena-esporte.vercel.app/img/varanda-coberta-area-de-convivencia-arena-esporte.webp</image:loc>
       <image:title>Varanda coberta com mesas, cadeiras e tenda de sombra ao lado das quadras da Arena Esporte</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://arena-esporte.netlify.app/img/turma-de-futevolei-jogo-noturno-arena-esporte.webp</image:loc>
+      <image:loc>https://arena-esporte.vercel.app/img/turma-de-futevolei-jogo-noturno-arena-esporte.webp</image:loc>
       <image:title>Turma de futevôlei reunida na quadra iluminada da Arena Esporte depois de um jogo à noite</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://arena-esporte.netlify.app/img/time-feminino-de-futevolei-arena-esporte.webp</image:loc>
+      <image:loc>https://arena-esporte.vercel.app/img/time-feminino-de-futevolei-arena-esporte.webp</image:loc>
       <image:title>Time feminino de futevôlei na quadra de areia da Arena Esporte</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://arena-esporte.netlify.app/agendar.html</loc>
+    <loc>https://arena-esporte.vercel.app/agendar.html</loc>
     <lastmod>2026-11-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
