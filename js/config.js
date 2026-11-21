@@ -17,11 +17,12 @@ window.ARENA_CONFIG = {
   // Endereço final do site, com barra no fim (links do WhatsApp e da reserva)
   siteUrl: 'https://arena-esporte.vercel.app/',
 
-  // Login do painel SÓ no modo demonstração (sem Supabase). Troque antes de mostrar ao cliente.
+  // Login do painel SÓ no modo demonstração (sem Supabase). Fica visível no código do site,
+  // então não protege nada de verdade: os dados do demo moram só no navegador de quem usa.
   // Com o Supabase ligado isto é ignorado: o login é o usuário criado em Authentication > Users.
   demoAdmin: {
     email: 'admin@arenaesporte.com.br',
-    senha: 'arena2026'
+    senha: 'areia-1083-quadra'
   },
 
   negocio: {

@@ -64,12 +64,7 @@ No painel o ADM pode passar por cima de antecedência, janela, limite do cliente
 
 Com `supabaseUrl` e `supabaseAnonKey` vazios em `js/config.js`, tudo funciona com dados de exemplo, mas fica salvo **só no navegador** de quem usa. Serve para apresentar ao cliente.
 
-O painel pede login também no demo. O acesso fica em `js/config.js` (`demoAdmin`):
-
-- e-mail: `admin@arenaesporte.com.br`
-- senha: `arena2026`
-
-Troque antes de mostrar ao cliente. No painel, "Restaurar dados de exemplo" apaga o que foi feito e volta ao exemplo.
+O painel pede login também no demo. O e-mail e a senha ficam em `js/config.js` (`demoAdmin`). Como esse arquivo vai junto com o site, a senha do demo não protege dados de verdade; quem protege é o login do Supabase, depois de ligado. No painel, "Restaurar dados de exemplo" apaga o que foi feito e volta ao exemplo.
 
 ## Colocar no ar com o Supabase (uns 10 minutos)
 
